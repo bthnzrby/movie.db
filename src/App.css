@@ -1,1 +1,12 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+.main-page{
+    background-color: #e6f4ff;
+    height: 100vh;
+    width: 100%;
+}
 
