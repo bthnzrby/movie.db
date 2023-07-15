@@ -26,19 +26,20 @@ const SearchBar = () => {
   };
 
   const goToDetailPage = (id:number) => {
-  navigate(`detail/${id}`);
-    
+  navigate(`/detail/${id}`);
+  setInputValue("");
   }
-
+  
   return (
     <div className="search-bar">
       <AutoComplete
+        value={inputValue}
         onChange={(e) => searchHandler(e)}
         // onSearch={handleSearch}
         placeholder="Film Ara"
         style={{ width: "250px" }}
         options={optionsGenerator()}
-        onSelect={(e)=>goToDetailPage(e)}
+        onSelect={(e)=>goToDetailPage(parseInt(e)) }
       />
 
     </div>

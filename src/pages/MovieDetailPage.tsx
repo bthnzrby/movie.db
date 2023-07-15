@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { API_KEY, DETAIL_URL } from "../config/Url";
 import { useParams } from "react-router-dom";
+import Navbar from "../components/navbar/Navbar";
 export interface MovieDetailOutput {
     adult: boolean
     backdrop_path: string
@@ -39,7 +40,7 @@ export interface MovieDetailOutput {
     vote_count: number;
 }
 const MovieDetailPage = () => {
-  const [movieDetail, setMovieDetail] = useState<MovieDetailOutput >();
+  const [movieDetail, setMovieDetail] = useState<MovieDetailOutput>();
 
   let params = useParams();
 
@@ -54,16 +55,21 @@ const MovieDetailPage = () => {
 
   return (
     <div>
-      { 
-      movieDetail &&
-        <div>{movieDetail.title}
-
-                <h1>{movieDetail.title}</h1>
-                <img src={`t/p/w533_and_h300_bestv2${movieDetail.poster_path}`} alt="" />
-                
+        <div>
+            <Navbar/>
         </div>
-        
-      }
+        <div>
+            { 
+            movieDetail &&
+              <div>{movieDetail.title}
+
+                      <h1>{movieDetail.title}</h1>
+                      <img src={`/t/p/w220_and_h330_face/${movieDetail.poster_path}`} alt="" />
+
+              </div>
+
+            }
+        </div>
     </div>
   )
 };
