@@ -17,7 +17,7 @@ const Navbar = () => {
         <div className='profil'> <Link to= {"/Profil"}>Profil</Link> </div>
 
         
-        
+
     </div>
   )
 }
