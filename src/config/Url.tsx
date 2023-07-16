@@ -3,3 +3,7 @@ export const BASE_URL = "https://api.themoviedb.org/3"
 export const SEARCH_URL = BASE_URL + "/search/movie?" +API_KEY
 
 export const DETAIL_URL = BASE_URL + "/movie/"
+
+export const IMG_URL = "https://image.tmdb.org/t/p"
+export const IMG_SIZE_500 = "/w500"
+export const IMG_SIZE_1920 = "/w1920_and_h800_multi_faces/"

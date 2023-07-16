@@ -1,0 +1,9 @@
+.deneme{
+    display: flex;
+    flex-direction: row;
+
+}
+.img{
+    height: 2vw;
+    width: 2vw;
+}

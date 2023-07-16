@@ -62,12 +62,9 @@ const MovieDetailPage = () => {
             { 
             movieDetail &&
               <div>{movieDetail.title}
-
                       <h1>{movieDetail.title}</h1>
-                      <img src={`/t/p/w220_and_h330_face/${movieDetail.poster_path}`} alt="" />
-
+                      <img src={`https://image.tmdb.org/t/p/w500${movieDetail.poster_path}`} alt="" />
               </div>
-
             }
         </div>
     </div>
