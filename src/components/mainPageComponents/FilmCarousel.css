@@ -1,9 +1,41 @@
-.deneme{
+.film-carousel{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 
 }
-.img{
-    height: 2vw;
-    width: 2vw;
+.populer-movies,
+.top-rated-movies,
+.upcoming-movies{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: space-between;
+    /* background: linear-gradient(to left,rgb(51, 35, 35), rgb(105, 104, 104)); */
+    background: linear-gradient(to left,rgb(51, 35, 35), #ffdb0f);
+
+    text-align: center;
+    line-height: 15vh;
+    font-size: 25px;
+    color: #fff;
+    /* color: #d7173e; */
+    /* margin-top: 3vh; */
+}
+
+.slide-movies{
+    display: flex;
+    flex-direction: row;
+    height: 55vh;
+    /* margin-top:  */
+    /* background: linear-gradient(to left,rgb(51, 35, 35), rgb(136, 135, 135)); */
+    background: linear-gradient(to left,rgb(51, 35, 35), #ffdb0f);
+
+    /* background-color: rgb(136, 135, 135); */
+    justify-content: space-around;
+    align-items: center;
+
+}
+.click-movie{
+    width: 19vw;
+    height: 21vw;
+    object-position: center;
 }

@@ -43,7 +43,7 @@ const MovieDetailPage = () => {
   const [movieDetail, setMovieDetail] = useState<MovieDetailOutput>();
 
   let params = useParams();
-
+  
   useEffect(() => {
     axios
       .get(DETAIL_URL + params.id + "?" + API_KEY)
@@ -61,9 +61,13 @@ const MovieDetailPage = () => {
         <div>
             { 
             movieDetail &&
-              <div>{movieDetail.title}
+              <div>
+                
+                  
+              
                       <h1>{movieDetail.title}</h1>
-                      <img src={`https://image.tmdb.org/t/p/w500${movieDetail.poster_path}`} alt="" />
+                    <img src={`https://image.tmdb.org/t/p/w500${movieDetail.poster_path}`} alt="" />
+                    <div>{movieDetail.title}</div>
               </div>
             }
         </div>

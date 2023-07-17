@@ -5,6 +5,7 @@ import type { DotPosition } from "antd/es/carousel";
 import axios from "axios";
 import "./FilmCarousel.css";
 import { API_KEY, DETAIL_URL, IMG_SIZE_500, IMG_URL } from "../../config/Url";
+import { Link } from "react-router-dom";
 
 export interface MoviesMainOutput {
   adult: boolean;
@@ -24,40 +25,41 @@ export interface MoviesMainOutput {
 }
 
 const contentStyle: React.CSSProperties = {
-  height: "460px",
-  color: "#fff",
-  lineHeight: "160px",
   textAlign: "center",
   background: "#364d79",
 };
 
 const FilmCarousel = () => {
-  const [dotPosition, setDotPosition] = useState<DotPosition>("top");
+  const [dotPosition, setDotPosition] = useState<DotPosition>("bottom");
 
   const [moviesPopuler, setMoviesPopuler] = useState<Array<MoviesMainOutput>>(
     []
   );
-  const [moviesTopRated, setMoviesTopRated] = useState<MoviesMainOutput>();
-  const [moviesUpcoming, setMoviesUpcoming] = useState<MoviesMainOutput>();
+  const [moviesTopRated, setMoviesTopRated] = useState<Array<MoviesMainOutput>>(
+    []
+  );
+  const [moviesUpcoming, setMoviesUpcoming] = useState<Array<MoviesMainOutput>>(
+    []
+  );
 
   useEffect(() => {
     axios.get(DETAIL_URL + "popular?" + API_KEY).then((res) => {
       setMoviesPopuler(res.data.results);
-      console.log(res.data.results);
+      // console.log(res.data.results);
     });
   }, [setMoviesPopuler]);
 
   useEffect(() => {
     axios.get(DETAIL_URL + "top_rated?" + API_KEY).then((res) => {
-      setMoviesTopRated(res.data);
+      setMoviesTopRated(res.data.results);
       console.log(res.data);
     });
   }, [setMoviesTopRated]);
 
   useEffect(() => {
     axios.get(DETAIL_URL + "upcoming?" + API_KEY).then((res) => {
-      setMoviesUpcoming(res.data);
-      console.log(res.data);
+      setMoviesUpcoming(res.data.results);
+      // console.log(res.data);
     });
   }, [setMoviesUpcoming]);
 
@@ -65,98 +67,74 @@ const FilmCarousel = () => {
   //   setDotPosition(value);
   // };
 
-  moviesPopuler && console.log(moviesPopuler);
+  // moviesPopuler && console.log(moviesPopuler);
+  // moviesTopRated && console.log(moviesTopRated);
+  // moviesUpcoming && console.log(moviesUpcoming);
 
+  const slidesPopular = [];
+  const slidesTopRated = [];
+  const slidesUpcoming = [];
+  for (let k = 0; k < 3 ; k++){
+    let moviesType = [];
+    if (k === 0)
+        moviesType = moviesPopuler
+    else if (k === 1 )
+        moviesType = moviesTopRated
+    else
+        moviesType = moviesUpcoming
+      for (let i = 0; i < moviesType.length; i += 4) {
+        const moviesInSlide = moviesType.slice(i, i + 4 ).map((movieP, index) => (
+          <div key={movieP.id}>
+            <li>
+              <Link to= {`/detail/${movieP.id}`}>
+              <img
+                  className="click-movie"
+                  src={`${IMG_URL}${IMG_SIZE_500}${movieP.poster_path}`}
+                  alt=""
+                />
+              </Link>
+
+            </li>
+            <p>{i + index}</p>
+          </div>
+        ));
+        k === 0 ?
+        slidesPopular.push(
+          <div key={i}>
+            <ul className="slide-movies">{moviesInSlide}</ul>
+          </div>
+        ):
+        k === 1 ?
+        slidesTopRated.push(
+            <div key={i}>
+              <ul className="slide-movies">{moviesInSlide}</ul>
+            </div>
+        ):  
+        slidesUpcoming.push(
+              <div key={i}>
+                <ul className="slide-movies">{moviesInSlide}</ul>
+              </div>
+        );
+      }
+  }
   return (
     <div className="film-carousel">
-      <div>
-        {/* <Radio.Group onChange={handlePositionChange} value={dotPosition} style={{ marginBottom: 8 }}>
-          <Radio.Button value="top">Top</Radio.Button>
-          <Radio.Button value="bottom">Bottom</Radio.Button>
-          <Radio.Button value="left">Left</Radio.Button>
-          <Radio.Button value="right">Right</Radio.Button>
-        </Radio.Group> */}
+      <div className="populer-movies">
+        <h2>Populer Movies</h2>
         <Carousel dotPosition={dotPosition}>
-          <div style={contentStyle}>
-            <ul className="deneme">
-              {moviesPopuler.map((movie: any, i: number) => {
-                if (i <= 4) {
-                  return (
-                    <div>
-                      <li key={movie.id}>
-                        <img
-                          className="img"
-                          src={IMG_URL + IMG_SIZE_500 + movie.poster_path}
-                          alt=""
-                        />
-                      </li>
-                      <p>{i}</p>
-                    </div>
-                  );
-                }
-              })}
-            </ul>
-          </div>
-          <div style={contentStyle}>
-            <ul className="deneme">
-              {moviesPopuler.map((movie: any, i: number) => {
-                if (4 < i && i <= 9) {
-                  return (
-                    <div>
-                      <li key={movie.id}>
-                        <img
-                          className="img"
-                          src={IMG_URL + IMG_SIZE_500 + movie.poster_path}
-                          alt=""
-                        />
-                      </li>
-                      <p>{i}</p>
-                    </div>
-                  );
-                }
-              })}
-            </ul>
-          </div>
-          <div style={contentStyle}>
-            <ul className="deneme">
-              {moviesPopuler.map((movie: any, i: number) => {
-                if (9 < i && i <= 14) {
-                  return (
-                    <div>
-                      <li key={movie.id}>
-                        <img
-                          className="img"
-                          src={IMG_URL + IMG_SIZE_500 + movie.poster_path}
-                          alt=""
-                        />
-                      </li>
-                      <p>{i}</p>
-                    </div>
-                  );
-                }
-              })}
-            </ul>
-          </div>
-          <div style={contentStyle}>
-            <ul className="deneme">
-              {moviesPopuler.map((movie: any, i: number) => {
-                if (14 < i && i <= 19) {
-                  return (
-                    <div>
-                      <li key={movie.id}>
-                        <img
-                          className="img"
-                          src={IMG_URL + IMG_SIZE_500 + movie.poster_path}
-                          alt=""
-                        />
-                      </li>
-                      <p>{i}</p>
-                    </div>
-                  );
-                }
-              })}
-            </ul>
-          </div>
+            {slidesPopular}
+        </Carousel>
+      </div>
+      <div className="top-rated-movies">
+        <h2>Top Rated Movies</h2>
+        <Carousel dotPosition={dotPosition}>
+            {slidesTopRated}
+        </Carousel>
+      </div>
+      <div className="upcoming-movies">
+        <h2>Upcoming Movies</h2>
+        <Carousel dotPosition={dotPosition}>
+            {slidesUpcoming}
         </Carousel>
       </div>
     </div>

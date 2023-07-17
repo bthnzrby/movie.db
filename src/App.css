@@ -5,8 +5,8 @@
   }
 
 .main-page{
-    background-color: #808080;
-    height: 100vh;
+    background: linear-gradient(to left,rgb(26, 1, 1), rgb(63, 3, 3));
+            height: 900vh;
     width: 100%;
 }
 

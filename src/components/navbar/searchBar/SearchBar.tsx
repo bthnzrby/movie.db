@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./SearchBar.css";
 import { AutoComplete } from "antd";
 import axios from "axios";
@@ -10,10 +10,13 @@ const SearchBar = () => {
   const [inputValue, setInputValue] = useState<string>("");
   const [movieData, setMovieData] = useState([]);
   
-
-  axios
+  useEffect(() => {
+    axios
     .get(SEARCH_URL + "&query=" + inputValue)
     .then((res) => setMovieData(res.data.results));
+
+  }, [inputValue]);
+
 
   const optionsGenerator = () => {
     let options: any = [];

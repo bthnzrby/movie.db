@@ -9,10 +9,9 @@ const Navbar = () => {
     <div className='navbar'>
         <div className='logo'>
            <Link to= {"/"}>Ana Sayfa</Link>
-           </div>
+        </div>
         <div className="search-bar">
           <SearchBar/>
-          
         </div>
         <div className='profil'> <Link to= {"/Profil"}>Profil</Link> </div>
 
