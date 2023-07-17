@@ -36,6 +36,7 @@ const SearchBar = () => {
   return (
     <div className="search-bar">
       <AutoComplete
+        className="input"
         value={inputValue}
         onChange={(e) => searchHandler(e)}
         // onSearch={handleSearch}

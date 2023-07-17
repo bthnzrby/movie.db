@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import type { RadioChangeEvent } from "antd";
-import { Carousel, Radio } from "antd";
+import { Carousel, Radio, Tooltip } from "antd";
 import type { DotPosition } from "antd/es/carousel";
 import axios from "axios";
 import "./FilmCarousel.css";
@@ -74,68 +74,67 @@ const FilmCarousel = () => {
   const slidesPopular = [];
   const slidesTopRated = [];
   const slidesUpcoming = [];
-  for (let k = 0; k < 3 ; k++){
+  for (let k = 0; k < 3; k++) {
     let moviesType = [];
-    if (k === 0)
-        moviesType = moviesPopuler
-    else if (k === 1 )
-        moviesType = moviesTopRated
-    else
-        moviesType = moviesUpcoming
-      for (let i = 0; i < moviesType.length; i += 4) {
-        const moviesInSlide = moviesType.slice(i, i + 4 ).map((movieP, index) => (
-          <div key={movieP.id}>
-            <li>
-              <Link to= {`/detail/${movieP.id}`}>
+    if (k === 0) moviesType = moviesPopuler;
+    else if (k === 1) moviesType = moviesTopRated;
+    else moviesType = moviesUpcoming;
+    for (let i = 0; i < moviesType.length; i += 5) {
+      const moviesInSlide = moviesType.slice(i, i + 5).map((movieP, index) => (
+        <div className="movie-field" key={movieP.id}>
+          <li>
+            <Link to={`/detail/${movieP.id}`}>
               <img
-                  className="click-movie"
-                  src={`${IMG_URL}${IMG_SIZE_500}${movieP.poster_path}`}
-                  alt=""
-                />
-              </Link>
-
-            </li>
-            <p>{i + index}</p>
-          </div>
-        ));
-        k === 0 ?
-        slidesPopular.push(
-          <div key={i}>
-            <ul className="slide-movies">{moviesInSlide}</ul>
-          </div>
-        ):
-        k === 1 ?
-        slidesTopRated.push(
+                className="click-movie"
+                src={`${IMG_URL}${IMG_SIZE_500}${movieP.poster_path}`}
+                alt=""
+              />
+              <div className="movie-info">
+                {movieP.title.length > 28 ? (
+                  <Tooltip placement="bottom" title={movieP.title}>
+                    <p className="movie-title">{movieP.title}</p>
+                  </Tooltip>
+                ) : (
+                  <p className="movie-title">{movieP.title}</p>
+                )}
+                <h4 className="movie-imdb">{movieP.vote_average}</h4>
+              </div>
+            </Link>
+          </li>
+        </div>
+      ));
+      k === 0
+        ? slidesPopular.push(
             <div key={i}>
               <ul className="slide-movies">{moviesInSlide}</ul>
             </div>
-        ):  
-        slidesUpcoming.push(
-              <div key={i}>
-                <ul className="slide-movies">{moviesInSlide}</ul>
-              </div>
-        );
-      }
+          )
+        : k === 1
+        ? slidesTopRated.push(
+            <div key={i}>
+              <ul className="slide-movies">{moviesInSlide}</ul>
+            </div>
+          )
+        : slidesUpcoming.push(
+            <div key={i}>
+              <ul className="slide-movies">{moviesInSlide}</ul>
+            </div>
+          );
+    }
   }
   return (
     <div className="film-carousel">
       <div className="populer-movies">
         <h2>Populer Movies</h2>
-        <Carousel dotPosition={dotPosition}>
-            {slidesPopular}
-        </Carousel>
+        <Carousel dotPosition={dotPosition}>{slidesPopular}</Carousel>
       </div>
       <div className="top-rated-movies">
         <h2>Top Rated Movies</h2>
-        <Carousel dotPosition={dotPosition}>
-            {slidesTopRated}
-        </Carousel>
+        <Carousel dotPosition={dotPosition}>{slidesTopRated}</Carousel>
       </div>
       <div className="upcoming-movies">
         <h2>Upcoming Movies</h2>
-        <Carousel dotPosition={dotPosition}>
-            {slidesUpcoming}
-        </Carousel>
+        <Carousel dotPosition={dotPosition}>{slidesUpcoming}</Carousel>
       </div>
     </div>
   );

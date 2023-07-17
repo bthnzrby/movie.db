@@ -1,6 +1,11 @@
+ @import url('https://fonts.googleapis.com/css2?family=Lilita+One&family=Roboto&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+
+
+
 .navbar{
     /* background: linear-gradient(to left,rgb(51, 35, 35), rgb(75, 74, 74)); */
-    background: linear-gradient(to left,rgb(51, 35, 35), #FFD700);
+    background: linear-gradient(to left, #ffdb0f,#5a4c08, #ffdb0f);
 
     height: 19vh;
     width: 100%;
@@ -10,7 +15,25 @@
     align-items: center;
     opacity: .9;
 }
-.logo link{
-    color: aliceblue;
+.navbar-links{
+    color: white !important;
     font-size: 28px;
+    text-decoration: none !important;
+    /* font-family: 'Lilita One', cursive; */
+    font-family: 'Abril Fatface', cursive;
+}
+.logo{
+    width: 33%;
+    display: flex;
+    justify-content: center;
+}
+.search-bar{
+    width: 33%;
+    display: flex;
+    justify-content: center;
+}
+.profil{
+    width: 33%;
+    display: flex;
+    justify-content: center;
 }

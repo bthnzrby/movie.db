@@ -8,12 +8,12 @@ const Navbar = () => {
   return (
     <div className='navbar'>
         <div className='logo'>
-           <Link to= {"/"}>Ana Sayfa</Link>
+           <Link className='navbar-links' to= {"/"}>Ana Sayfa</Link>
         </div>
         <div className="search-bar">
           <SearchBar/>
         </div>
-        <div className='profil'> <Link to= {"/Profil"}>Profil</Link> </div>
+        <div className='profil'> <Link className='navbar-links' to= {"/Profil"}> Profil </Link> </div>
 
         
 
