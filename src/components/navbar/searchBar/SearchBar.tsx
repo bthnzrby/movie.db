@@ -40,7 +40,7 @@ const SearchBar = () => {
         value={inputValue}
         onChange={(e) => searchHandler(e)}
         // onSearch={handleSearch}
-        placeholder="Film Ara"
+        placeholder="Search Movie"
         style={{ width: "250px" }}
         options={optionsGenerator()}
         onSelect={(e)=>goToDetailPage(parseInt(e)) }

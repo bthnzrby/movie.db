@@ -97,7 +97,19 @@ const FilmCarousel = () => {
                 ) : (
                   <p className="movie-title">{movieP.title}</p>
                 )}
-                <h4 className="movie-imdb">{movieP.vote_average}</h4>
+                <h4
+                  className="movie-imdb"
+                  style={{
+                    color:
+                      movieP.vote_average > 7
+                        ? "green"
+                        : movieP.vote_average > 4
+                        ? "yellow"
+                        : "red",
+                  }}
+                >
+                  {movieP.vote_average}
+                </h4>
               </div>
             </Link>
           </li>
