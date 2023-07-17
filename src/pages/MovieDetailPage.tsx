@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { API_KEY, DETAIL_URL } from "../config/Url";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/navbar/Navbar";
+import HeartOutlined from "@ant-design/icons";
 export interface MovieDetailOutput {
     adult: boolean
     backdrop_path: string
@@ -53,21 +54,33 @@ const MovieDetailPage = () => {
     })
   }, [params.id]);
 
+  console.log(movieDetail);
+  
   return (
-    <div>
+    <div className="movie-detail-page">
         <div>
             <Navbar/>
         </div>
-        <div>
+        <div className="movie-detail-info">
             { 
             movieDetail &&
-              <div>
-                
-                  
-              
-                      <h1>{movieDetail.title}</h1>
-                    <img src={`https://image.tmdb.org/t/p/w500${movieDetail.poster_path}`} alt="" />
-                    <div>{movieDetail.title}</div>
+              <div className="movie-detail-preview">
+                <div className="movie-detail-page-img">
+                  <img src={`https://image.tmdb.org/t/p/w500${movieDetail.poster_path}`} alt="" />                   
+                </div>
+                <div className="movie-detail-page-paragraph">
+                  <h5> Release Date: {movieDetail.release_date}</h5>
+                  <h1>{movieDetail.title}</h1>
+                  {/* <HeartOutlined className="for-z-index"/> */}
+                  <h3>{movieDetail.original_title}</h3>                   
+                    <h3 style={{color:"black"}}>  "{movieDetail.tagline}"</h3>
+                  {/* <h5>Language:{movieDetail.original_language} </h5> */}
+                  <p>{movieDetail.overview}</p>
+                  <div className="movie-detail-vote">
+                    <h3> Counted Vote: {movieDetail.vote_count}</h3>
+                    <h3 style={{color: movieDetail.vote_average >7 ? "green": movieDetail.vote_average >4 ? "yellow": "red" }}> imdb: {movieDetail.vote_average}</h3>
+                  </div>
+                </div>
               </div>
             }
         </div>

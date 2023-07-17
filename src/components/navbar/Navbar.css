@@ -7,7 +7,7 @@
     /* background: linear-gradient(to left,rgb(51, 35, 35), rgb(75, 74, 74)); */
     background: linear-gradient(to left, #ffdb0f,#5a4c08, #ffdb0f);
 
-    height: 19vh;
+    height: 18vh;
     width: 100%;
     display: flex;
     flex-direction: row;

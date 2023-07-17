@@ -131,7 +131,7 @@ const FilmCarousel = () => {
             <div key={i}>
               <ul className="slide-movies">{moviesInSlide}</ul>
             </div>
-          )
+          );
     }
   }
   return (
