@@ -42,6 +42,7 @@ export interface MovieDetailOutput {
 }
 const MovieDetailPage = () => {
   const [movieDetail, setMovieDetail] = useState<MovieDetailOutput>();
+  const [movieCredits, setMovieCredits] = useState([]);
 
   let params = useParams();
   
@@ -50,11 +51,19 @@ const MovieDetailPage = () => {
       .get(DETAIL_URL + params.id + "?" + API_KEY)
       .then((res) => {
         setMovieDetail(res.data)
-        console.log(res.data)
     })
   }, [params.id]);
 
-  console.log(movieDetail);
+  useEffect(() => {
+    axios
+      .get(DETAIL_URL + params.id + "/credits?" + API_KEY)
+      .then((res) => {
+        setMovieCredits(res.data)
+        console.log(res.data);        
+    })
+  }, [params.id]);
+
+//   console.log(movieDetail);
   
   return (
     <div className="movie-detail-page">
@@ -62,7 +71,7 @@ const MovieDetailPage = () => {
             <Navbar/>
         </div>
         <div className="movie-detail-info">
-            { 
+            {
             movieDetail &&
               <div className="movie-detail-preview">
                 <div className="movie-detail-page-img">
@@ -72,8 +81,15 @@ const MovieDetailPage = () => {
                   <h5> Release Date: {movieDetail.release_date}</h5>
                   <h1>{movieDetail.title}</h1>
                   {/* <HeartOutlined className="for-z-index"/> */}
-                  <h3>{movieDetail.original_title}</h3>                   
+                  <h3>{movieDetail.original_title}</h3>                    
                     <h3 style={{color:"black"}}>  "{movieDetail.tagline}"</h3>
+                    <div className="genres">
+                      {movieDetail.genres.map((genre:{id: number, name: string}, i:number)=> 
+                      <div>
+                        <h4> {genre.name}</h4>
+                      </div>
+                      )}
+                    </div>
                   {/* <h5>Language:{movieDetail.original_language} </h5> */}
                   <p>{movieDetail.overview}</p>
                   <div className="movie-detail-vote">

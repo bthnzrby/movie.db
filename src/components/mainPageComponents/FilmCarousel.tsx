@@ -52,7 +52,6 @@ const FilmCarousel = () => {
   useEffect(() => {
     axios.get(DETAIL_URL + "top_rated?" + API_KEY).then((res) => {
       setMoviesTopRated(res.data.results);
-      console.log(res.data);
     });
   }, [setMoviesTopRated]);
 

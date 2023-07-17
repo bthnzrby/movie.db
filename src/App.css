@@ -21,11 +21,12 @@
 }
 .movie-detail-info {
   background: linear-gradient(to left, #ffdb0f, #5a4c08, #ffdb0f);
-  height: 70vh;
+  height: 74vh;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 3rem;
 }
 .movie-detail-preview {
   display: flex;
@@ -77,4 +78,9 @@
   color: red;
   font-size: 100px;
 } 
-
+.genres{
+  display: flex;
+}
+.genres h4{
+  margin-left: 7px;
+}
