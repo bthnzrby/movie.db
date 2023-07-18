@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { API_KEY, DETAIL_URL } from "../config/Url";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/navbar/Navbar";
-import HeartOutlined from "@ant-design/icons";
+// import HeartOutlined from "@ant-design/icons";
 export interface MovieDetailOutput {
     adult: boolean
     backdrop_path: string
@@ -40,9 +40,24 @@ export interface MovieDetailOutput {
     vote_average: number;
     vote_count: number;
 }
+
+export interface MovieCastOutput{
+  cast_id: number;
+  character: any;
+  credit_id: string;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  order: number;
+  popularity: number;
+  profile_path: string;
+  original_name: string;
+
+}
 const MovieDetailPage = () => {
   const [movieDetail, setMovieDetail] = useState<MovieDetailOutput>();
-  const [movieCredits, setMovieCredits] = useState([]);
+  const [movieCredits, setMovieCredits] = useState<Array<MovieCastOutput>>([]);
 
   let params = useParams();
   
@@ -58,8 +73,8 @@ const MovieDetailPage = () => {
     axios
       .get(DETAIL_URL + params.id + "/credits?" + API_KEY)
       .then((res) => {
-        setMovieCredits(res.data)
-        console.log(res.data);        
+        setMovieCredits(res.data.cast)
+        console.log(res.data.cast);        
     })
   }, [params.id]);
 
@@ -96,6 +111,13 @@ const MovieDetailPage = () => {
                     <h3> Counted Vote: {movieDetail.vote_count}</h3>
                     <h3 style={{color: movieDetail.vote_average >7 ? "green": movieDetail.vote_average >4 ? "yellow": "red" }}> imdb: {movieDetail.vote_average}</h3>
                   </div>
+                  <div className="casts">
+                      {movieCredits.map((castD: MovieCastOutput)=> 
+                      <div>
+                        <h4> {castD.character}</h4>
+                      </div>
+                      )}
+                    </div>
                 </div>
               </div>
             }
