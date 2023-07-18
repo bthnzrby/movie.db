@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { API_KEY, DETAIL_URL } from "../config/Url";
+import { API_KEY, DETAIL_URL } from "../../config/Url";
 import { useParams } from "react-router-dom";
-import Navbar from "../components/navbar/Navbar";
+import Navbar from "../../components/navbar/Navbar";
+import "./MovieDetailPage.css";
+
 // import HeartOutlined from "@ant-design/icons";
 export interface MovieDetailOutput {
     adult: boolean
@@ -58,6 +60,7 @@ export interface MovieCastOutput{
 const MovieDetailPage = () => {
   const [movieDetail, setMovieDetail] = useState<MovieDetailOutput>();
   const [movieCredits, setMovieCredits] = useState<Array<MovieCastOutput>>([]);
+  const [movieRecommendation, setMovieRecommendation] = useState()
 
   let params = useParams();
   
@@ -74,7 +77,16 @@ const MovieDetailPage = () => {
       .get(DETAIL_URL + params.id + "/credits?" + API_KEY)
       .then((res) => {
         setMovieCredits(res.data.cast)
-        console.log(res.data.cast);        
+        // console.log(res.data.cast);        
+    })
+  }, [params.id]);
+
+  useEffect(() => {
+    axios
+      .get(DETAIL_URL + params.id + "/recommendations?" + API_KEY)
+      .then((res) => {
+        setMovieRecommendation(res.data.result)
+        console.log(res.data.results);        
     })
   }, [params.id]);
 
@@ -111,16 +123,28 @@ const MovieDetailPage = () => {
                     <h3> Counted Vote: {movieDetail.vote_count}</h3>
                     <h3 style={{color: movieDetail.vote_average >7 ? "green": movieDetail.vote_average >4 ? "yellow": "red" }}> imdb: {movieDetail.vote_average}</h3>
                   </div>
-                  <div className="casts">
-                      {movieCredits.map((castD: MovieCastOutput)=> 
-                      <div>
-                        <h4> {castD.character}</h4>
-                      </div>
-                      )}
-                    </div>
                 </div>
               </div>
             }
+        </div>
+        <div className="cast">
+            <div className="cast-info">
+              <h1>Cast</h1>
+              <div className="cast-cards">
+                
+                {movieCredits.map((castD: MovieCastOutput)=> 
+                <div className="cast-card">
+                  <div className="cast-img">
+                    <img src={`	https://www.themoviedb.org/t/p/w138_and_h175_face${castD.profile_path}`} alt="" /> 
+                  </div>
+                  <div className="cast-names">
+                    <h3>{castD.original_name}</h3> 
+                    <h4> {castD.character}</h4>
+                  </div>
+                </div>
+                )}
+              </div>
+            </div>
         </div>
     </div>
   )

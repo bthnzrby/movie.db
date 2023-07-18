@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
-import MainPage from "./pages/MainPage";
+import MainPage from "./pages/MainPage/MainPage";
 import { Route, Routes, useParams } from "react-router-dom";
 import { link } from "fs";
-import MovieDetailPage from "./pages/MovieDetailPage";
+import MovieDetailPage from "./pages/MovieDetail/MovieDetailPage";
 import ProfilPage from "./pages/ProfilPage";
 function App() {
 
