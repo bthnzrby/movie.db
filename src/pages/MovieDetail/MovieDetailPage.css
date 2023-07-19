@@ -106,10 +106,10 @@ border:1px solid black;
   height: 13vw;
   width: 10.5vw;
 }
-.cast-names{
+/* .cast-names{
   
-  /* background-color: #a9900c; */
-}
+  background-color: #a9900c;
+} */
 .cast-names h3{
   /* color: rgb(50, 50, 50); */
   font-size: 22px;
@@ -117,4 +117,38 @@ border:1px solid black;
 .cast-names h4{
   color: rgb(50, 50, 50);
   font-size: 17px;
+}
+.recommendation{
+  background: linear-gradient(to left, #ffdb0f, #5a4c08, #ffdb0f);
+  height: 70vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.recommendation-info{
+  width: 80%;
+  border: 2px solid #9a8415;
+  height: 64vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #9a8415;
+}
+.recommendation-info h1{
+  font-size: 45px;
+}
+.recommendation-cards{
+  display:flex ;
+  flex-direction: row;
+  overflow-x: scroll;
+  height: 100%;
+
+}
+.recommendation-card{
+  margin: 17px 13px;
+  border:1px solid black;
+}
+.recommendation-card img{
+  height: 17vw;
+  width: 13vw;
 }
