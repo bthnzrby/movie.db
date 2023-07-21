@@ -6,7 +6,7 @@ import { SEARCH_URL } from "../../../config/Url";
 import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
-  let navigate = useNavigate ();
+  const navigate = useNavigate ();
   const [inputValue, setInputValue] = useState<string>("");
   const [movieData, setMovieData] = useState([]);
   

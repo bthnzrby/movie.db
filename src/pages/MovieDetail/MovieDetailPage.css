@@ -9,12 +9,13 @@
 }
 .movie-detail-info {
   background: linear-gradient(to left, #ffdb0f, #5a4c08, #ffdb0f);
-  height: 74vh;
+  height: auto;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   padding-bottom: 3rem;
+  padding-top:3rem ;
 }
 .movie-detail-preview {
   display: flex;
