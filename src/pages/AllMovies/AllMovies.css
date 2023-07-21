@@ -1,4 +1,14 @@
-.all-movies-section{
-    background: linear-gradient(to left, #ffdb0f, #5a4c08, #ffdb0f);
 
+.all-movies h1{
+    text-align: center;
+}
+.all-movies-section-title{
+    background: linear-gradient(to left, #ffdb0f, #5a4c08, #ffdb0f);
+    font-size: 35px;
+    height: 12vw;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* font-family: 'Abril Fatface', cursive; */
 }

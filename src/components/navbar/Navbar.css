@@ -15,6 +15,11 @@
     align-items: center;
     opacity: .9;
 }
+
+.navbar-links:hover{
+    color:  red !important;
+}
+
 .navbar-links{
     color: white !important;
     font-size: 28px;

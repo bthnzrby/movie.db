@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap");
+
 
 .film-carousel {
   display: flex;
@@ -53,7 +53,7 @@
   background-color: #a9900c;
   text-overflow: ellipsis;
   box-shadow: 0px 0px 25px #a9900c;
-  /* box-shadow: 0px 0px 10px black; */
+  
 }
 .movie-title {
   font-size: 1.3vw;

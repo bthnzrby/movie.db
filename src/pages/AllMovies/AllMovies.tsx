@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../components/navbar/Navbar";
-import { API_KEY, DETAIL_URL, IMG_URL } from "../../config/Url";
+import { API_KEY, DETAIL_URL} from "../../config/Url";
 import axios from "axios";
 import { MoviesMainOutput } from "../../components/mainPageComponents/FilmCarousel";
+
+import "./AllMovies.css";
+import Movies from "./Movies/Movies";
 
 const AllMovies = () => {
   const [moviesPopuler, setMoviesPopuler] = useState<Array<MoviesMainOutput>>(
@@ -34,24 +37,16 @@ const AllMovies = () => {
     });
   }, [setMoviesPopuler]);
 
-  
-
+ 
   return (
     <div className="all-movies">
       <Navbar />
-      <div className="all-movies-section">
-        <div className="all-movies-card">
-          {moviesUpcoming.map((upComing: MoviesMainOutput) => (
-            <div className="all-movies-card">
-              {/* {upComing} */}
-              {/* <img
-                src={`${IMG_URL}${IMG_SIZE_500}${recom.poster_path}`}
-                alt=""
-              /> */}
-            </div>
-          ))}
-        </div>
+      <div className="all-movies-section-title">
+        <h1>All Movies</h1>
       </div>
+      <Movies movies={moviesUpcoming}/>
+      <Movies movies={moviesPopuler}/>
+      <Movies movies={moviesTopRated}/>
     </div>
   );
 };

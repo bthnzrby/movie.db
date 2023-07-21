@@ -1,11 +1,11 @@
 import React from 'react'
 import "./SignUp.css";
-import Navbar from '../../components/navbar/Navbar'
+import InputForm from '../../components/InputForm/InputForm';
 
 const SignUp = () => {
   return (
     <div>
-        sign up
+        <InputForm/>
     </div>
   )
 }
