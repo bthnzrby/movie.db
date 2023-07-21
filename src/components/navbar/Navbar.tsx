@@ -9,11 +9,16 @@ const Navbar = () => {
     <div className='navbar'>
         <div className='logo'>
            <Link className='navbar-links' to= {"/"}>Main Page</Link>
+           <Link className='navbar-links' to= {"/AllMovies"}>All Movies</Link>
         </div>
         <div className="search-bar">
           <SearchBar/>
         </div>
-        <div className='profil'> <Link className='navbar-links' to= {"/Profil"}> Profile </Link> </div>
+        <div className='profil'> 
+        <Link className='navbar-links' to= {"/SignUp"}> Sign up </Link> 
+        <Link className='navbar-links' to= {"/SignIn"}> Sign in </Link> 
+
+        </div>
 
         
 

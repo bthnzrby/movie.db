@@ -62,8 +62,8 @@
 }
 .for-z-index {
   z-index: 2;
-  color: red;
-  font-size: 100px;
+  color: black;
+  font-size: 26px;
 }
 .genres {
   display: flex;
@@ -151,4 +151,28 @@ border:1px solid black;
 .recommendation-card img{
   height: 17vw;
   width: 13vw;
+}
+.reviews{
+  background: linear-gradient(to left, #ffdb0f, #5a4c08, #ffdb0f);
+  height: 110vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  /* text-align: center; */
+  /* padding: 36px; */
+}
+.reviews-info{
+  width: 80%;
+  border: 2px solid #9a8415;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #9a8415;
+  margin-bottom: 3vw;
+}
+.reviews-cards{
+  display:flex ;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: 100%;
 }

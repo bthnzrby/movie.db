@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { API_KEY, DETAIL_URL, IMG_SIZE_500, IMG_URL } from "../../config/Url";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import "./MovieDetailPage.css";
 import { MoviesMainOutput } from "../../components/mainPageComponents/FilmCarousel";
 import { Tooltip } from "antd";
+import { HeartOutlined } from "@ant-design/icons";
 
 // import HeartOutlined from "@ant-design/icons";
 export interface MovieDetailOutput {
@@ -50,6 +51,11 @@ export interface MovieDetailOutput {
   vote_count: number;
 }
 
+export interface MovieReviewsOutput{
+  author:string;
+  content:string
+}
+
 export interface MovieCastOutput {
   cast_id: number;
   character: any;
@@ -70,6 +76,7 @@ const MovieDetailPage = () => {
   const [movieRecommendation, setMovieRecommendation] = useState<
     Array<MoviesMainOutput>
   >([]);
+  const [movieReviews, setMovieReviews] = useState<Array<MovieReviewsOutput>>([]);
 
   let params = useParams();
 
@@ -91,8 +98,15 @@ const MovieDetailPage = () => {
       .get(DETAIL_URL + params.id + "/recommendations?" + API_KEY)
       .then((res) => {
         setMovieRecommendation(res.data.results);
-        console.log(res.data.results);
+        // console.log(res.data.results);
       });
+  }, [params.id]);
+
+  useEffect(() => {
+    axios.get(DETAIL_URL + params.id + "/reviews?" + API_KEY).then((res) => {
+      setMovieReviews(res.data.results);
+      console.log(res.data.results);
+    });
   }, [params.id]);
 
   //   console.log(movieDetail);
@@ -114,7 +128,7 @@ const MovieDetailPage = () => {
             <div className="movie-detail-page-paragraph">
               <h5> Release Date: {movieDetail.release_date}</h5>
               <h1>{movieDetail.title}</h1>
-              {/* <HeartOutlined className="for-z-index"/> */}
+              <HeartOutlined className="for-z-index"/>
               <h3>{movieDetail.original_title}</h3>
               <h3 style={{ color: "black" }}> "{movieDetail.tagline}"</h3>
               <div className="genres">
@@ -184,6 +198,7 @@ const MovieDetailPage = () => {
             {movieRecommendation &&
               movieRecommendation.map((recom: MoviesMainOutput) => (
                 <div className="recommendation-card">
+                  <Link to={`/detail/${recom.id}`}>
                   <div className="recommendation-img">
                     <img
                       src={`${IMG_URL}${IMG_SIZE_500}${recom.poster_path}`}
@@ -212,8 +227,27 @@ const MovieDetailPage = () => {
                       {recom.vote_average}
                     </h4>
                   </div>
+                  </Link>
                 </div>
               ))}
+          </div>
+        </div>
+      </div>
+      <div className="reviews">
+        <div className="reviews-info">
+          <h1>Reviews</h1>
+          <div className="reviews-cards">
+          {movieReviews &&
+            movieReviews.map((reviews: MovieReviewsOutput) => (              
+              <div className="reviews-card">
+                <div className="author">
+                  {reviews.author}
+                </div>
+                <div className="review-content">
+                  {reviews.content}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
