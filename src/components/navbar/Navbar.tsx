@@ -10,11 +10,12 @@ const Navbar = () => {
   const { user } = useAuth();
   // const navigate = useNavigate();
   
-  const logOut1 =async () => {
+  const logOutLink =async () => {
     try {
       await logOut()
       message.info( "Çıkış Başarılı")
       localStorage.removeItem("userData")
+      // history.push('/LogIn');
     } catch (error) {
       console.log(error);
 
@@ -36,7 +37,12 @@ const Navbar = () => {
         <SearchBar />
       </div>
       <div className="profil">
-        {!user ? (
+        {user && localStorage.getItem("userData") ? (
+          <div>
+            <Link className="favories" to={"Favories"}> Favories</Link>
+            <Link className="log-out" to={"/SignIn"} onClick={logOutLink}> Log Out</Link>
+          </div>
+        ) : (
           <div>
             <Link className="navbar-links" to={"/SignUp"}>
               {" "}
@@ -46,11 +52,6 @@ const Navbar = () => {
               {" "}
               Sign in{" "}
             </Link>
-          </div>
-        ) : (
-          <div>
-            <Link className="favories" to={"Favories"}> Favories</Link>
-            <Link className="log-out" to={"/SignIn"} onClick={logOut1}> log out</Link>
           </div>
         )}
       </div>
