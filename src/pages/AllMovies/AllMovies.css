@@ -1,14 +1,42 @@
 
+.all-movies{
+    width: 100%;
+}
+
+.all-movies-section {
+    display: flex;
+    flex-direction: row;
+    /* background: linear-gradient(to left, #ffdb0f, #5a4c08, #ffdb0f); */
+    width: 100%;  
+    /* justify-content: ;
+      align-items: ; */
+  }
+
+.all-movies-section-content{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
 .all-movies h1{
     text-align: center;
 }
 .all-movies-section-title{
     background: linear-gradient(to left, #ffdb0f, #5a4c08, #ffdb0f);
     font-size: 35px;
-    height: 12vw;
+    /* height: 12vw; */
     text-align: center;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     /* font-family: 'Abril Fatface', cursive; */
+}
+.filter-section{
+    width: 20%;
+  }
+.all-movies-section{
+    display: flex;
+    width: 80%;
+    flex-direction: column;
 }

@@ -6,6 +6,7 @@ import { MoviesMainOutput } from "../../components/mainPageComponents/FilmCarous
 
 import "./AllMovies.css";
 import Movies from "./Movies/Movies";
+import FilterSection from "../../components/FilterSection/FilterSection";
 
 const AllMovies = () => {
   const [moviesPopuler, setMoviesPopuler] = useState<Array<MoviesMainOutput>>(
@@ -42,11 +43,18 @@ const AllMovies = () => {
     <div className="all-movies">
       <Navbar />
       <div className="all-movies-section-title">
+        <div className="all-movies-section-content">
+          <div className="filter-section">
+            <FilterSection/>
+          </div>
+          <div className="all-movies-section">
         <h1>All Movies</h1>
+            <Movies movies={moviesUpcoming}/>
+            <Movies movies={moviesPopuler}/>
+            <Movies movies={moviesTopRated}/>
+          </div> 
+        </div>
       </div>
-      <Movies movies={moviesUpcoming}/>
-      <Movies movies={moviesPopuler}/>
-      <Movies movies={moviesTopRated}/>
     </div>
   );
 };

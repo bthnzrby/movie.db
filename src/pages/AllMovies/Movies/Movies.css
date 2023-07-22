@@ -1,21 +1,16 @@
 
 
-.all-movies-section {
-  display: flex;
-  flex-direction: column;
-  background: linear-gradient(to left, #ffdb0f, #5a4c08, #ffdb0f);
 
-  /* justify-content: ;
-    align-items: ; */
-}
+
 .all-movies-cards {
   display: flex;
   flex-direction: row;
   align-content: space-around;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: 30px 20px;
   justify-content: center;
   margin: 15px 0;
+  /* width: 90%; */
 }
 
 .all-movies-card {
