@@ -3,14 +3,14 @@
     width: 100%;
 }
 
-.all-movies-section {
-    display: flex;
-    flex-direction: row;
+/* .all-movies-section { */
+    /* display: flex; */
+    /* flex-direction: row; */
     /* background: linear-gradient(to left, #ffdb0f, #5a4c08, #ffdb0f); */
-    width: 100%;  
+    /* width: 100%;   */
     /* justify-content: ;
       align-items: ; */
-  }
+  /* } */
 
 .all-movies-section-content{
     display: flex;
@@ -33,10 +33,13 @@
     /* font-family: 'Abril Fatface', cursive; */
 }
 .filter-section{
-    width: 20%;
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
   }
 .all-movies-section{
     display: flex;
-    width: 80%;
+    width: 75%;
     flex-direction: column;
 }
