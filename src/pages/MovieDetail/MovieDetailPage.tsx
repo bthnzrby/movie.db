@@ -5,8 +5,11 @@ import { Link, useParams } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import "./MovieDetailPage.css";
 import { MoviesMainOutput } from "../../components/mainPageComponents/FilmCarousel";
-import { Tooltip } from "antd";
-import { HeartOutlined } from "@ant-design/icons";
+import { Tooltip, message } from "antd";
+import { HeartFilled } from "@ant-design/icons";
+// import { Firestore } from "firebase/firestore";
+import { addFavories, getFavories } from "../../Firebase/Firebase";
+import { useAuth } from "../../Context/AuthContext";
 
 // import HeartOutlined from "@ant-design/icons";
 export interface MovieDetailOutput {
@@ -51,9 +54,9 @@ export interface MovieDetailOutput {
   vote_count: number;
 }
 
-export interface MovieReviewsOutput{
-  author:string;
-  content:string
+export interface MovieReviewsOutput {
+  author: string;
+  content: string;
 }
 
 export interface MovieCastOutput {
@@ -76,9 +79,22 @@ const MovieDetailPage = () => {
   const [movieRecommendation, setMovieRecommendation] = useState<
     Array<MoviesMainOutput>
   >([]);
-  const [movieReviews, setMovieReviews] = useState<Array<MovieReviewsOutput>>([]);
+  const [movieReviews, setMovieReviews] = useState<Array<MovieReviewsOutput>>(
+    []
+  );
+  const [isClicked, setIsClicked] = useState(false);
 
+  const { getUser } = useAuth();
   let params = useParams();
+
+  useEffect(() => {
+    getFavories(getUser().uid).then((res) => {
+      // console.log(res);
+      const result = res.find((movie) => movie.id === movieDetail?.id);
+      if (result) setIsClicked(true);
+      else setIsClicked(false);
+    });
+  }, [movieDetail]);
 
   useEffect(() => {
     axios.get(DETAIL_URL + params.id + "?" + API_KEY).then((res) => {
@@ -109,7 +125,28 @@ const MovieDetailPage = () => {
     });
   }, [params.id]);
 
-  //   console.log(movieDetail);
+  const handleIconClick = () => {
+    if (!isClicked) {
+      setIsClicked(true);
+      addFavories(movieDetail, getUser().uid);
+      message.info("Favorilere Başarıyla Eklendi");
+    } else {
+      setIsClicked(false);
+      message.info("Favorilerden Başarıyla Çıkarıldı");
+    }
+  };
+
+  // const handleAddToFavories = async () => {
+  //   try {
+  //     await colRef('favories').add({
+  //       title: movieDetail.data.results.title,
+  //       director: movieDetail.data.results.director,
+  //     });
+  //     console.log('Film favorilere eklendi!');
+  //   } catch (error) {
+  //     console.error('Film favorilere eklenirken bir hata oluştu:', error);
+  //   }
+  // };
 
   return (
     <div className="movie-detail-page">
@@ -128,7 +165,11 @@ const MovieDetailPage = () => {
             <div className="movie-detail-page-paragraph">
               <h5> Release Date: {movieDetail.release_date}</h5>
               <h1>{movieDetail.title}</h1>
-              <HeartOutlined className="for-z-index"/>
+              <HeartFilled
+                style={{ color: isClicked ? "red" : "black" }}
+                onClick={handleIconClick}
+                className="for-z-index"
+              />
               <h3>{movieDetail.original_title}</h3>
               <h3 style={{ color: "black" }}> "{movieDetail.tagline}"</h3>
               <div className="genres">
@@ -199,34 +240,34 @@ const MovieDetailPage = () => {
               movieRecommendation.map((recom: MoviesMainOutput) => (
                 <div className="recommendation-card">
                   <Link to={`/detail/${recom.id}`}>
-                  <div className="recommendation-img">
-                    <img
-                      src={`${IMG_URL}${IMG_SIZE_500}${recom.poster_path}`}
-                      alt=""
-                    />
-                  </div>
-                  <div className="movie-info">
-                    {recom.title.length > 15 ? (
-                      <Tooltip placement="bottom" title={recom.title}>
+                    <div className="recommendation-img">
+                      <img
+                        src={`${IMG_URL}${IMG_SIZE_500}${recom.poster_path}`}
+                        alt=""
+                      />
+                    </div>
+                    <div className="movie-info">
+                      {recom.title.length > 15 ? (
+                        <Tooltip placement="bottom" title={recom.title}>
+                          <p className="movie-title">{recom.title}</p>
+                        </Tooltip>
+                      ) : (
                         <p className="movie-title">{recom.title}</p>
-                      </Tooltip>
-                    ) : (
-                      <p className="movie-title">{recom.title}</p>
-                    )}
-                    <h4
-                      className="movie-imdb"
-                      style={{
-                        color:
-                          recom.vote_average > 7
-                            ? "green"
-                            : recom.vote_average > 4
-                            ? "yellow"
-                            : "red",
-                      }}
-                    >
-                      {recom.vote_average}
-                    </h4>
-                  </div>
+                      )}
+                      <h4
+                        className="movie-imdb"
+                        style={{
+                          color:
+                            recom.vote_average > 7
+                              ? "green"
+                              : recom.vote_average > 4
+                              ? "yellow"
+                              : "red",
+                        }}
+                      >
+                        {recom.vote_average}
+                      </h4>
+                    </div>
                   </Link>
                 </div>
               ))}
@@ -237,17 +278,13 @@ const MovieDetailPage = () => {
         <div className="reviews-info">
           <h1>Reviews</h1>
           <div className="reviews-cards">
-          {movieReviews &&
-            movieReviews.map((reviews: MovieReviewsOutput) => (              
-              <div className="reviews-card">
-                <div className="author">
-                  {reviews.author}
+            {movieReviews &&
+              movieReviews.map((reviews: MovieReviewsOutput) => (
+                <div className="reviews-card">
+                  <div className="author">{reviews.author}</div>
+                  <div className="review-content">{reviews.content}</div>
                 </div>
-                <div className="review-content">
-                  {reviews.content}
-                </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </div>

@@ -10,6 +10,23 @@ import FilterSection from "../../components/FilterSection/FilterSection";
 import { Button } from "antd";
 
 const AllMovies = () => {
+  // const [genres, setGenres] = useState<Array<GenresOutput>>([]);
+  // const [checkeds, setCheckeds] = useState<Array<string>>([])
+  // const [denem, setdenem] = useState<any>([])
+
+  // useEffect(() => {
+  //   axios.get(DISCOVER_URL,{
+  //     params: {with_genres: checkeds.join(",") }
+  //   }).then((res) => {
+ 
+  //     setdenem(res.data.results);
+    
+  //   });
+  // }, [checkeds]);
+
+
+
+
   // const [moviesPopuler, setMoviesPopuler] = useState<Array<MoviesMainOutput>>(
   //   []
   // );
@@ -56,14 +73,15 @@ const AllMovies = () => {
       <div className="all-movies-section-title">
         <div className="all-movies-section-content">
           <div className="filter-section">
-            <FilterSection />
+            {/* <FilterSection setCheckeds = {setCheckeds} setGenres setGenres /> */}
+            <FilterSection/>
           </div>
           <div className="all-movies-section">
             <h1>All Movies</h1>
             {/* <Movies movies={moviesUpcoming}/> */}
             {/* <Movies movies={moviesPopuler}/> */}
             {/* <Movies movies={moviesTopRated}/> */}
-            <Movies movies={allMovies} />
+            <Movies  movies={allMovies} />
             <Button onClick={() => setPageCount(pageCount + 1)}> tıkla</Button>
           </div>
         </div>

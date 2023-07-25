@@ -6,6 +6,7 @@ interface ProviderProps {
 }
 
 interface IAuthContext{
+  getUser: () => User;
   user:User;
   setUser: any;
 }
@@ -23,12 +24,20 @@ const AuthProvider: FC<ProviderProps> = ({ children }) => {
       setUser(JSON.parse(localUser))
   }, [])
 
+  const getUser = () =>{
+    const localUser = (localStorage.getItem("userData"))
+    if(localUser)
+      return (JSON.parse(localUser));
+  }
+
   return (
-    <AuthContext.Provider value={{user,setUser}}>
+    <AuthContext.Provider value={{user ,getUser,setUser}}>
       {children}
     </AuthContext.Provider>
   );
 };
+
+
 
 export const useAuth =():IAuthContext=>{
   return useContext(AuthContext) as IAuthContext

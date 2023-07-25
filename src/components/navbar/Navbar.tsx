@@ -38,12 +38,12 @@ const Navbar = () => {
       </div>
       <div className="profil">
         {user && localStorage.getItem("userData") ? (
-          <div>
-            <Link className="favories" to={"Favories"}> Favories</Link>
-            <Link className="log-out" to={"/SignIn"} onClick={logOutLink}> Log Out</Link>
+          <div className="in-out">
+            <Link className="navbar-links" to={"/Favories"}> Favories</Link>
+            <Link className="navbar-links" to={"/SignIn"} onClick={logOutLink}> Log Out</Link>
           </div>
         ) : (
-          <div>
+          <div className="in-out">
             <Link className="navbar-links" to={"/SignUp"}>
               {" "}
               Sign up{" "}

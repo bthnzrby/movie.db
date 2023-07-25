@@ -8,6 +8,7 @@ import SignIn from "./pages/login/SignIn";
 import SignUp from "./pages/login/SignUp";
 import AllMovies from "./pages/AllMovies/AllMovies";
 import ScrollToTop from "./helpers/ScrollToTop";
+import Favories from "./pages/Favories/Favories";
 function App() {
 
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path={`/SignIn`} element= {<SignIn/>}/>
         <Route path={`/SignUp`} element= {<SignUp/>}/>
         <Route path={`/AllMovies`} element= {<AllMovies/>}/>
+        <Route path={`/Favories`} element= {<Favories/>}/>
       </Routes>
       <ScrollToTop/>
 

@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import { addDoc, collection, getDocs, getFirestore } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -22,6 +23,9 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
+const db = getFirestore();
+const colRef = collection(db, "favories");
+
 export const register = async (email: string, password: string) => {
   const { user } = await createUserWithEmailAndPassword(auth, email, password);
   return user;
@@ -31,7 +35,23 @@ export const login = async (email: string, password: string) => {
   return user;
 };
 export const logOut = async () => {
-  await signOut(auth)
-  return true
-}
+  await signOut(auth);
+  return true;
+};
+
+export const addFavories = (movie: any, userId: string) => {
+  addDoc(colRef, { movie, userId });
+};
+
+export const getFavories = async (id: string) => {
+  let favories: any[] = [];
+
+  const snapshot = await getDocs(colRef);
+
+  snapshot.docs.forEach((doc) => {
+    if (doc.data().userId === id) favories.push({ ...doc.data().movie });
+  });
+
+  return favories;
+};
 export default app;
