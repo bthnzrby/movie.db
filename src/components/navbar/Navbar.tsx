@@ -39,7 +39,7 @@ const Navbar = () => {
       <div className="profil">
         {user && localStorage.getItem("userData") ? (
           <div className="in-out">
-            <Link className="navbar-links" to={"/Favories"}> Favories</Link>
+            <Link className="navbar-links" to={"/Favorites"}> Favorites</Link>
             <Link className="navbar-links" to={"/SignIn"} onClick={logOutLink}> Log Out</Link>
           </div>
         ) : (

@@ -8,7 +8,7 @@ import { MoviesMainOutput } from "../../components/mainPageComponents/FilmCarous
 import { Tooltip, message } from "antd";
 import { HeartFilled } from "@ant-design/icons";
 // import { Firestore } from "firebase/firestore";
-import { addFavories, getFavories } from "../../Firebase/Firebase";
+import { addFavorites, getFavorites } from "../../Firebase/Firebase";
 import { useAuth } from "../../Context/AuthContext";
 
 // import HeartOutlined from "@ant-design/icons";
@@ -88,7 +88,7 @@ const MovieDetailPage = () => {
   let params = useParams();
 
   useEffect(() => {
-    getFavories(getUser().uid).then((res) => {
+    getFavorites(getUser().uid).then((res) => {
       // console.log(res);
       const result = res.find((movie) => movie.id === movieDetail?.id);
       if (result) setIsClicked(true);
@@ -128,7 +128,7 @@ const MovieDetailPage = () => {
   const handleIconClick = () => {
     if (!isClicked) {
       setIsClicked(true);
-      addFavories(movieDetail, getUser().uid);
+      addFavorites(movieDetail, getUser().uid);
       message.info("Favorilere Başarıyla Eklendi");
     } else {
       setIsClicked(false);
@@ -136,9 +136,9 @@ const MovieDetailPage = () => {
     }
   };
 
-  // const handleAddToFavories = async () => {
+  // const handleAddToFavorites = async () => {
   //   try {
-  //     await colRef('favories').add({
+  //     await colRef('favorites').add({
   //       title: movieDetail.data.results.title,
   //       director: movieDetail.data.results.director,
   //     });

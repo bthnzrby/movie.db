@@ -24,7 +24,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore();
-const colRef = collection(db, "favories");
+const colRef = collection(db, "favorites");
 
 export const register = async (email: string, password: string) => {
   const { user } = await createUserWithEmailAndPassword(auth, email, password);
@@ -39,19 +39,19 @@ export const logOut = async () => {
   return true;
 };
 
-export const addFavories = (movie: any, userId: string) => {
+export const addFavorites = (movie: any, userId: string) => {
   addDoc(colRef, { movie, userId });
 };
 
-export const getFavories = async (id: string) => {
-  let favories: any[] = [];
+export const getFavorites = async (id: string) => {
+  let favorites: any[] = [];
 
   const snapshot = await getDocs(colRef);
 
   snapshot.docs.forEach((doc) => {
-    if (doc.data().userId === id) favories.push({ ...doc.data().movie });
+    if (doc.data().userId === id) favorites.push({ ...doc.data().movie });
   });
 
-  return favories;
+  return favorites;
 };
 export default app;
