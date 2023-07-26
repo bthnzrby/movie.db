@@ -18,14 +18,11 @@ const AllMovies = () => {
   //   axios.get(DISCOVER_URL,{
   //     params: {with_genres: checkeds.join(",") }
   //   }).then((res) => {
- 
+
   //     setdenem(res.data.results);
-    
+
   //   });
   // }, [checkeds]);
-
-
-
 
   // const [moviesPopuler, setMoviesPopuler] = useState<Array<MoviesMainOutput>>(
   //   []
@@ -74,15 +71,19 @@ const AllMovies = () => {
         <div className="all-movies-section-content">
           <div className="filter-section">
             {/* <FilterSection setCheckeds = {setCheckeds} setGenres setGenres /> */}
-            <FilterSection/>
+            <FilterSection />
           </div>
           <div className="all-movies-section">
             <h1>All Movies</h1>
             {/* <Movies movies={moviesUpcoming}/> */}
             {/* <Movies movies={moviesPopuler}/> */}
             {/* <Movies movies={moviesTopRated}/> */}
-            <Movies  movies={allMovies} />
-            <Button onClick={() => setPageCount(pageCount + 1)}> tıkla</Button>
+            <Movies movies={allMovies} />
+            <div className="all-movies-button">
+              <Button onClick={() => setPageCount(pageCount + 1)}>
+                Show More...
+              </Button>
+            </div>
           </div>
         </div>
       </div>

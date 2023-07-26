@@ -6,7 +6,15 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { addDoc, collection, getDocs, getFirestore } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  getDocs,
+  getFirestore,
+  query,
+  where,
+} from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -54,4 +62,18 @@ export const getFavorites = async (id: string) => {
 
   return favorites;
 };
+
+export const removeFavorites = async (movie: any, userId: string) => {
+  const snapshot = await getDocs(
+    query(
+      colRef,
+      where("userId", "==", userId),
+      where("movie.id", "==", movie.id)
+    )
+  );
+  snapshot.docs.forEach((doc) => {
+    deleteDoc(doc.ref);
+  });
+};
+
 export default app;

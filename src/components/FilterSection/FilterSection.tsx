@@ -12,8 +12,8 @@ interface GenresOutput {
 
 const FilterSection = () => {
   const [genres, setGenres] = useState<Array<GenresOutput>>([]);
-  const [checkeds, setCheckeds] = useState<Array<string>>([])
-  const [denem, setdenem] = useState<any>([])
+  const [checkeds, setCheckeds] = useState<Array<string>>([]);
+  const [denem, setdenem] = useState<any>([]);
 
   useEffect(() => {
     axios.get(GENRE_URL).then((res) => {
@@ -24,25 +24,22 @@ const FilterSection = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(DISCOVER_URL,{
-      params: {with_genres: checkeds.join(",") }
-    }).then((res) => {
- 
-      setdenem(res.data.results);
-      
+    axios
+      .get(DISCOVER_URL, {
+        params: { with_genres: checkeds.join(",") },
+      })
+      .then((res) => {
+        setdenem(res.data.results);
 
-      
-      // console.log(res.data.genres);
-    });
+        // console.log(res.data.genres);
+      });
   }, [checkeds]);
-
-  
 
   // useEffect(() => {
   //   axios.get(GENRE_URL).then((res) => {
   //     setGenres(res.data.genres);
 
-      // console.log(res.data.genres);
+  // console.log(res.data.genres);
   //   });
   // }, []);
 
@@ -51,12 +48,10 @@ const FilterSection = () => {
   };
 
   const changeChecbox = (e: CheckboxChangeEvent) => {
-    
-    if(e.target.checked ){
-      setCheckeds([...checkeds,e.target.value]) 
-     
-    }else{
-      setCheckeds(checkeds.filter(checked => checked !== e.target.value))
+    if (e.target.checked) {
+      setCheckeds([...checkeds, e.target.value]);
+    } else {
+      setCheckeds(checkeds.filter((checked) => checked !== e.target.value));
     }
     // console.log(checkeds);
   };
@@ -65,22 +60,22 @@ const FilterSection = () => {
 
   // }
 
-
-
   const items: CollapseProps["items"] = [
     {
       key: "1",
       label: "Genres",
-      children: 
+      children: (
         <div>
           {genres &&
             genres.map((genre: GenresOutput) => (
               <div>
-                <Checkbox value={genre.id} onChange={changeChecbox}>{genre.name}</Checkbox>
+                <Checkbox value={genre.id} onChange={changeChecbox}>
+                  {genre.name}
+                </Checkbox>
               </div>
             ))}
         </div>
-      ,
+      ),
       //   <div>
       //   <Checkbox onChange={changeChecbox}>Checkbox</Checkbox>
       // </div>

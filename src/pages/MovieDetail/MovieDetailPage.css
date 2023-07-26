@@ -15,7 +15,7 @@
   justify-content: center;
   align-items: center;
   padding-bottom: 3rem;
-  padding-top:3rem ;
+  padding-top: 3rem;
 }
 .movie-detail-preview {
   display: flex;
@@ -89,21 +89,21 @@
   background-color: #9a8415;
 }
 
-.cast-info h1{
+.cast-info h1 {
   font-size: 45px;
 }
 .cast-cards {
-  display:flex ;
+  display: flex;
   flex-direction: row;
   overflow-x: scroll;
   height: 100%;
   /* justify-content: space-around; */
 }
-.cast-card{
-margin: 17px 13px;
-border:1px solid black;
+.cast-card {
+  margin: 17px 13px;
+  border: 1px solid black;
 }
-.cast-card img{
+.cast-card img {
   height: 13vw;
   width: 10.5vw;
 }
@@ -111,15 +111,15 @@ border:1px solid black;
   
   background-color: #a9900c;
 } */
-.cast-names h3{
+.cast-names h3 {
   /* color: rgb(50, 50, 50); */
   font-size: 22px;
 }
-.cast-names h4{
+.cast-names h4 {
   color: rgb(50, 50, 50);
   font-size: 17px;
 }
-.recommendation{
+.recommendation {
   background: linear-gradient(to left, #ffdb0f, #5a4c08, #ffdb0f);
   height: 70vh;
   width: 100%;
@@ -127,7 +127,7 @@ border:1px solid black;
   justify-content: center;
   text-align: center;
 }
-.recommendation-info{
+.recommendation-info {
   width: 80%;
   border: 2px solid #9a8415;
   height: 64vh;
@@ -135,25 +135,44 @@ border:1px solid black;
   flex-direction: column;
   background-color: #9a8415;
 }
-.recommendation-info h1{
+.recommendation-info h1 {
   font-size: 45px;
 }
-.recommendation-cards{
-  display:flex ;
+.recommendation-cards {
+  display: flex;
   flex-direction: row;
   overflow-x: scroll;
   height: 100%;
-
 }
-.recommendation-card{
+.recommendation-card {
   margin: 17px 13px;
-  border:1px solid black;
+  border: 1px solid black;
 }
-.recommendation-card img{
+.recommendation-card img {
   height: 17vw;
-  width: 13vw;
+  width: 15vw;
 }
-.reviews{
+.recommedation-movie-info {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  border: 2px solid #a9900c;
+  height: 13.5vh;
+  background-color: #a9900c;
+  text-overflow: ellipsis;
+  box-shadow: 0px 0px 25px #a9900c;
+}
+.recommendation-movie-imdb {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1vw;
+  font-family: "Abril Fatface", cursive;
+  color: black;
+  margin-right: 4px;
+}
+.reviews {
   background: linear-gradient(to left, #ffdb0f, #5a4c08, #ffdb0f);
   height: 110vh;
   width: 100%;
@@ -162,7 +181,7 @@ border:1px solid black;
   /* text-align: center; */
   /* padding: 36px; */
 }
-.reviews-info{
+.reviews-info {
   width: 80%;
   border: 2px solid #9a8415;
   height: 90vh;
@@ -171,9 +190,37 @@ border:1px solid black;
   background-color: #9a8415;
   margin-bottom: 3vw;
 }
-.reviews-cards{
-  display:flex ;
+.reviews-info h1 {
+  font-size: 45px;
+  text-align: center;
+}
+.reviews-cards {
+  display: flex;
   flex-direction: column;
   overflow-y: scroll;
   height: 100%;
 }
+.reviews-card {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid black;
+}
+.reviews-card .author {
+  color: white;
+  text-align: center;
+  font-size: 30px;
+  font-family: "Dosis", sans-serif;
+  /* border-bottom: 1px solid white; */
+  /* border-width: 50%; */
+}
+.review-content {
+  font-size: 21px;
+  font-family: "Dosis", sans-serif;
+}
+/* .hr {
+  float: left;
+  width: 50%; */
+/* display: flex; */
+/* justify-content: center; */
+/* align-items: center; */
+/* } */

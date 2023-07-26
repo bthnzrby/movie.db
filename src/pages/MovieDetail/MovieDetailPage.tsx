@@ -8,7 +8,11 @@ import { MoviesMainOutput } from "../../components/mainPageComponents/FilmCarous
 import { Tooltip, message } from "antd";
 import { HeartFilled } from "@ant-design/icons";
 // import { Firestore } from "firebase/firestore";
-import { addFavorites, getFavorites } from "../../Firebase/Firebase";
+import {
+  addFavorites,
+  getFavorites,
+  removeFavorites,
+} from "../../Firebase/Firebase";
 import { useAuth } from "../../Context/AuthContext";
 
 // import HeartOutlined from "@ant-design/icons";
@@ -132,10 +136,11 @@ const MovieDetailPage = () => {
       message.info("Favorilere Başarıyla Eklendi");
     } else {
       setIsClicked(false);
+      removeFavorites(movieDetail, getUser().uid);
       message.info("Favorilerden Başarıyla Çıkarıldı");
     }
   };
-
+  //  setTodos(todos.filter((el) => el.id !== todo.id));
   // const handleAddToFavorites = async () => {
   //   try {
   //     await colRef('favorites').add({
@@ -246,7 +251,7 @@ const MovieDetailPage = () => {
                         alt=""
                       />
                     </div>
-                    <div className="movie-info">
+                    <div className="recommedation-movie-info">
                       {recom.title.length > 15 ? (
                         <Tooltip placement="bottom" title={recom.title}>
                           <p className="movie-title">{recom.title}</p>
@@ -255,7 +260,7 @@ const MovieDetailPage = () => {
                         <p className="movie-title">{recom.title}</p>
                       )}
                       <h4
-                        className="movie-imdb"
+                        className="recommendation-movie-imdb"
                         style={{
                           color:
                             recom.vote_average > 7
@@ -282,6 +287,7 @@ const MovieDetailPage = () => {
               movieReviews.map((reviews: MovieReviewsOutput) => (
                 <div className="reviews-card">
                   <div className="author">{reviews.author}</div>
+                  {/* <hr className="hr" /> */}
                   <div className="review-content">{reviews.content}</div>
                 </div>
               ))}
