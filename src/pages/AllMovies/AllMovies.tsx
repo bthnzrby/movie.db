@@ -60,6 +60,11 @@ const AllMovies = () => {
     []
   );
   const [startDate, setStartDate] = useState<string>();
+  const [endDate, setEndDate] = useState<string>();
+  const [startImdb, setStartImdb] = useState<1 | 10 | null>();
+  const [endImdb, setEndImdb] = useState<1 | 10 | null>();
+
+  // const [startImdb, setStartImdb] = useState<string>();
 
   useEffect(() => {
     axios.get(DISCOVER_URL + "&page=" + pageCount).then((res) => {
@@ -82,9 +87,9 @@ const AllMovies = () => {
           page: pageCount,
           with_genres: checkeds.join(","),
           "release_date.gte": startDate,
-          "release_date.lte": "2015-05-03",
-          "vote_average.gte": 4.3,
-          "vote_average.lte": 5.5,
+          "release_date.lte": endDate,
+          "vote_average.gte": startImdb,
+          "vote_average.lte": endImdb,
         },
       })
       .then((res) => {
@@ -117,6 +122,9 @@ const AllMovies = () => {
               setCheckeds={setCheckeds}
               filterHandler={filterHandler}
               setStartDate={setStartDate}
+              setEndDate={setEndDate}
+              setEndImdb={setEndImdb}
+              setStartImdb={setStartImdb}
             />
           </div>
           <div className="all-movies-section">
