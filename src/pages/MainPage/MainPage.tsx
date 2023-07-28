@@ -1,7 +1,7 @@
 import React from "react";
-
-import Navbar from "../components/navbar/Navbar";
-import FilmCarousel from "../components/mainPageComponents/FilmCarousel";
+import "./MainPage.css";
+import Navbar from "../../components/navbar/Navbar";
+import FilmCarousel from "../../components/mainPageComponents/FilmCarousel";
 
 const MainPage = () => {
  

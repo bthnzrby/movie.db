@@ -1,0 +1,32 @@
+.sign-in{
+    background: linear-gradient(to left, #ffdb0f, #5a4c08, #ffdb0f);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sign-in-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid black;
+    width: 25vw;
+    height: 17vw;
+
+}
+.sign-in-form-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.sign-in-input{
+    width: 17vw;
+
+}
+.sign-in-input label{
+    color: white !important;
+    font-size: 28px;
+    font-family: 'Abril Fatface', cursive;
+}
