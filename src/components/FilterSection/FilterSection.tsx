@@ -5,6 +5,7 @@ import {
   CollapseProps,
   DatePicker,
   DatePickerProps,
+  InputNumber,
 } from "antd";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import axios from "axios";
@@ -23,6 +24,9 @@ interface CheckedsOutput {
   setCheckeds: React.Dispatch<React.SetStateAction<string[]>>;
   filterHandler: (e: any) => void;
   setStartDate: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setEndDate: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setStartImdb: React.Dispatch<React.SetStateAction<1 | 10 | null | undefined>>;
+  setEndImdb: React.Dispatch<React.SetStateAction<1 | 10 | null | undefined>>;
 }
 
 const FilterSection = ({
@@ -30,6 +34,9 @@ const FilterSection = ({
   checkeds,
   filterHandler,
   setStartDate,
+  setEndDate,
+  setStartImdb,
+  setEndImdb,
 }: CheckedsOutput) => {
   const [genres, setGenres] = useState<Array<GenresOutput>>([]);
 
@@ -95,13 +102,30 @@ const FilterSection = ({
       children: (
         <p>
           <DatePicker onChange={(e, a) => setStartDate(a)} />
+          <DatePicker onChange={(e, a) => setEndDate(a)} />
         </p>
       ),
     },
     {
       key: "3",
       label: "IMDB",
-      children: <p></p>,
+      children: (
+        <p>
+          {" "}
+          <InputNumber
+            placeholder="first imdb"
+            min={1}
+            max={10}
+            onChange={(e) => setStartImdb(e)}
+          />
+          <InputNumber
+            placeholder="last imdb"
+            min={1}
+            max={10}
+            onChange={(e) => setEndImdb(e)}
+          />
+        </p>
+      ),
     },
   ];
 
