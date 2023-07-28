@@ -7,7 +7,7 @@ import { MoviesMainOutput } from "../../components/mainPageComponents/FilmCarous
 import "./AllMovies.css";
 import Movies from "./Movies/Movies";
 import FilterSection from "../../components/FilterSection/FilterSection";
-import { Button } from "antd";
+import { Button, DatePickerProps } from "antd";
 
 const AllMovies = () => {
   // const [genres, setGenres] = useState<Array<GenresOutput>>([]);
@@ -55,14 +55,55 @@ const AllMovies = () => {
   //   }, [setAllMovies]);
   const [allMovies, setAllMovies] = useState<Array<MoviesMainOutput>>([]);
   const [pageCount, setPageCount] = useState<number>(1);
+  const [checkeds, setCheckeds] = useState<Array<string>>([]);
+  const [filteredMovies, setFilteredMovies] = useState<Array<MoviesMainOutput>>(
+    []
+  );
+  const [startDate, setStartDate] = useState<string>();
 
   useEffect(() => {
     axios.get(DISCOVER_URL + "&page=" + pageCount).then((res) => {
-      setAllMovies((prevAllMovies) => [...prevAllMovies, ...res.data.results]);
+      setFilteredMovies((prevAllMovies) => [
+        ...prevAllMovies,
+        ...res.data.results,
+      ]);
 
       // console.log(res.data.results);
     });
   }, [pageCount]);
+
+  const filterHandler = (e: any) => {
+    if (e.target.name === "show-more") setPageCount(pageCount + 1);
+
+    // e.target.name === "show-more"
+    axios
+      .get(DISCOVER_URL, {
+        params: {
+          page: pageCount,
+          with_genres: checkeds.join(","),
+          "release_date.gte": startDate,
+          "release_date.lte": "2015-05-03",
+          "vote_average.gte": 4.3,
+          "vote_average.lte": 5.5,
+        },
+      })
+      .then((res) => {
+        if (e.target.name !== "show-more") {
+          setFilteredMovies(res.data.results);
+        } else {
+          setFilteredMovies((prevFilteredMovies) => [
+            ...prevFilteredMovies,
+            ...res.data.results,
+          ]);
+        }
+
+        // console.log(res.data.genres);
+      });
+  };
+
+  // useEffect(() => {
+  //   filterHandler();
+  // }, []);
 
   return (
     <div className="all-movies">
@@ -71,19 +112,25 @@ const AllMovies = () => {
         <div className="all-movies-section-content">
           <div className="filter-section">
             {/* <FilterSection setCheckeds = {setCheckeds} setGenres setGenres /> */}
-            <FilterSection />
+            <FilterSection
+              checkeds={checkeds}
+              setCheckeds={setCheckeds}
+              filterHandler={filterHandler}
+              setStartDate={setStartDate}
+            />
           </div>
           <div className="all-movies-section">
             <h1>All Movies</h1>
             {/* <Movies movies={moviesUpcoming}/> */}
             {/* <Movies movies={moviesPopuler}/> */}
             {/* <Movies movies={moviesTopRated}/> */}
-            <Movies movies={allMovies} />
+            <Movies movies={filteredMovies} />
             <div className="all-movies-button">
-              <Button onClick={() => setPageCount(pageCount + 1)}>
+              <Button name="show-more" onClick={filterHandler}>
                 Show More...
               </Button>
             </div>
+            <div></div>
           </div>
         </div>
       </div>

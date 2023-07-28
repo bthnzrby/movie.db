@@ -4,7 +4,6 @@ import { IMG_SIZE_500, IMG_URL } from "../../../config/Url";
 import "./Movies.css";
 import React from "react";
 import { Link } from "react-router-dom";
-import FilterSection from "../../../components/FilterSection/FilterSection";
 
 interface Props {
   movies: MoviesMainOutput[];
