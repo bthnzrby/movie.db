@@ -94,7 +94,6 @@ const MovieDetailPage = () => {
     useEffect(() => {
         if (localStorage.getItem("userData"))
             getFavorites(getUser().uid).then((res) => {
-                // console.log(res);
                 const result = res.find((movie) => movie.id === movieDetail?.id);
                 if (result) setIsClicked(true);
                 else setIsClicked(false);
@@ -110,7 +109,6 @@ const MovieDetailPage = () => {
     useEffect(() => {
         axios.get(DETAIL_URL + params.id + "/credits?" + API_KEY).then((res) => {
             setMovieCredits(res.data.cast);
-            // console.log(res.data.cast);
         });
     }, [params.id]);
 
@@ -119,7 +117,6 @@ const MovieDetailPage = () => {
             .get(DETAIL_URL + params.id + "/recommendations?" + API_KEY)
             .then((res) => {
                 setMovieRecommendation(res.data.results);
-                // console.log(res.data.results);
             });
     }, [params.id]);
 
@@ -141,19 +138,6 @@ const MovieDetailPage = () => {
             message.info("Favorilerden Başarıyla Çıkarıldı");
         }
     };
-    //  setTodos(todos.filter((el) => el.id !== todo.id));
-    // const handleAddToFavorites = async () => {
-    //   try {
-    //     await colRef('favorites').add({
-    //       title: movieDetail.data.results.title,
-    //       director: movieDetail.data.results.director,
-    //     });
-    //     console.log('Film favorilere eklendi!');
-    //   } catch (error) {
-    //     console.error('Film favorilere eklenirken bir hata oluştu:', error);
-    //   }
-    // };
-
     return (
         <div className="movie-detail-page">
             <div>
@@ -187,7 +171,6 @@ const MovieDetailPage = () => {
                                     )
                                 )}
                             </div>
-                            {/* <h5>Language:{movieDetail.original_language} </h5> */}
                             <p>{movieDetail.overview}</p>
                             <div className="movie-detail-vote">
                                 <h3> Counted Vote: {movieDetail.vote_count}</h3>
@@ -231,7 +214,6 @@ const MovieDetailPage = () => {
                                         <h4> {castD.character}</h4>
                                     )}
 
-                                    {/* <h4> {castD.character}</h4> */}
                                 </div>
                             </div>
                         ))}

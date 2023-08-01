@@ -1,7 +1,5 @@
 import React from "react";
 import "./SignIn.css";
-// import InputForm from "../../components/InputForm/InputForm";
-// import { Form } from 'react-router-dom';
 import { Button, Input, Form, message } from "antd";
 import { login } from "../../Firebase/Firebase";
 import { useAuth } from "../../Context/AuthContext";
@@ -12,7 +10,6 @@ const SignIn = () => {
     const navigate = useNavigate();
 
     const onFinish = async (values: any) => {
-        // console.log('Success:', values);
         try {
             const user = await login(values.email, values.password);
             setUser(user);
@@ -22,11 +19,6 @@ const SignIn = () => {
             message.error("şifreniz ya da e-postanız hatalı")
         }
     };
-
-    const onFinishFailed = (errorInfo: any) => {
-        // console.log('Failed:', errorInfo);
-    };
-
     return (
         <div className="sign-in">
             <div className="sign-in-form">
@@ -38,7 +30,7 @@ const SignIn = () => {
                     style={{ maxWidth: 600 }}
                     initialValues={{ remember: true }}
                     onFinish={onFinish}
-                    onFinishFailed={onFinishFailed}
+
                     autoComplete="off"
                 >
                     <Form.Item
@@ -60,9 +52,6 @@ const SignIn = () => {
 
                     </Form.Item>
 
-                    {/* <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
-      <Checkbox>Remember me</Checkbox>
-    </Form.Item> */}
 
                     <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                         <Button type="primary" htmlType="submit">

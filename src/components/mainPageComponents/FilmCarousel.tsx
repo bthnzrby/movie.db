@@ -6,7 +6,6 @@ import axios from "axios";
 import "./FilmCarousel.css";
 import { API_KEY, DETAIL_URL, IMG_SIZE_500, IMG_URL } from "../../config/Url";
 import { Link } from "react-router-dom";
-
 export interface MoviesMainOutput {
     adult: boolean;
     backdrop_path: string;
